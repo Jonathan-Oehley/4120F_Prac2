@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1552140297 source:d:\university\4th_year\eee4120f\prac_2\4120f_prac2\prac2.cpp
+	"Prac2.h"
+
+1552140297 d:\university\4th_year\eee4120f\prac_2\4120f_prac2\prac2.h
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	"Tools/JPEG.h"
+	"Tools/Timer.h"
+
+1552140297 d:\university\4th_year\eee4120f\prac_2\4120f_prac2\tools\jpeg.h
+	<stdio.h>
+	"jpeglib.h"
+
+1552140297 d:\university\4th_year\eee4120f\prac_2\4120f_prac2\tools\jpeglib.h
+	"jconfig.h"
+	"jmorecfg.h"
+	"jpegint.h"
+	"jerror.h"
+
+1552140297 d:\university\4th_year\eee4120f\prac_2\4120f_prac2\tools\jconfig.h
+
+1552140297 d:\university\4th_year\eee4120f\prac_2\4120f_prac2\tools\jmorecfg.h
+
+1552140297 d:\university\4th_year\eee4120f\prac_2\4120f_prac2\tools\timer.h
+	<stdio.h>
+
+1552140297 source:d:\university\4th_year\eee4120f\prac_2\4120f_prac2\tools\jpeg.cpp
+	"JPEG.h"
+
+1552140297 source:d:\university\4th_year\eee4120f\prac_2\4120f_prac2\tools\timer.cpp
+	"Timer.h"
+	<windows.h>
+	<time.h>
+

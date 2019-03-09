@@ -17,6 +17,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-lpthread" />
+					<Add library="Libraries/LibJPEG/jpeg.lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -29,12 +31,12 @@
 			<Add library="jpeg" />
 			<Add directory="Libraries/LibJPEG" />
 		</Linker>
+		<Unit filename="Prac2.cpp" />
+		<Unit filename="Prac2.h" />
 		<Unit filename="Tools/JPEG.cpp" />
 		<Unit filename="Tools/JPEG.h" />
 		<Unit filename="Tools/Timer.cpp" />
 		<Unit filename="Tools/Timer.h" />
-		<Unit filename="Prac2.cpp" />
-		<Unit filename="Prac2.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
