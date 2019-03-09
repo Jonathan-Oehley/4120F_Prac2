@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Prac2" />
+		<Option makefile="makefile" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Prac2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="Tools" />
+			<Add directory="Libraries/LibJPEG" />
+		</Compiler>
+		<Linker>
+			<Add library="jpeg" />
+			<Add directory="Libraries/LibJPEG" />
+		</Linker>
+		<Unit filename="Tools/JPEG.cpp" />
+		<Unit filename="Tools/JPEG.h" />
+		<Unit filename="Tools/Timer.cpp" />
+		<Unit filename="Tools/Timer.h" />
+		<Unit filename="Prac2.cpp" />
+		<Unit filename="Prac2.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
