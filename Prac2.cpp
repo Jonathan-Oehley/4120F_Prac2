@@ -23,7 +23,7 @@
 
 // This is each thread's "main" function.  It receives a unique ID
 void* Thread_Main(void* Parameter){
- int ID = *((int*)Parameter);
+ //int ID = *((int*)Parameter);
 
  pthread_mutex_lock(&Mutex);
   //printf("Hello from thread %d\n", ID);
@@ -63,7 +63,7 @@ int main(int argc, char** argv){
  pthread_mutex_init(&Mutex, 0);
 
  // Read the input image
- if(!Input.Read("Data/fly.jpg")){
+ if(!Input.Read("Data/Alan2.jpg")){
   printf("Cannot read image\n");
   return -1;
  }
@@ -100,36 +100,34 @@ int main(int argc, char** argv){
  // Output.Rows[0][0] = 156;
  // printf("Output [0][0] R,G,B is: %d,%d,%d\n", Output.Rows[0][0],Output.Rows[0][1],Output.Rows[0][2]);
 
- int test_arr1 [9] = {1,2,3,4,5,6,7,8,9};
+// int test_arr1 [9] = {1,2,3,4,5,6,7,8,9};
 // for (int i=0;i<9;i++){
 //    printf("%d ",test_arr1[i]);
 // }
- int test_arr2 [6] = {1,2,3,4,5,6};
+// int test_arr2 [6] = {1,2,3,4,5,6};
 // printf("Median 1 is %d\n",bubble_med(test_arr1,7));
 // printf("Median 2 is %d",bubble_med(test_arr2,6));
 
- printf("\n\n");
+// printf("\n\n");
 
  // Implement Median Filter
+ // Note that for loops run over the pixel indices, not the RGB values
  printf("Starting filter\n");
- printf("Input.Width is %d\n",Input.Width);
  tic();
- int y_u,y_d,x_l, x_r, y_length,x_length,yi,xi; // Bounds on the columns/rows when constructing the data array for sorting
+ int y_u,y_d,x_l, x_r; // Bounds on the columns/rows when constructing the data array for sorting
+ int y_length,x_length,yi,xi; //Bounds and indices for area to copy
  for(y = 0; y < Input.Height; y++){
     // Check to see if we are close to top/bottom of image
     if (y<4){
         y_u = y;
-        //printf("%d",y_u);
     }
     else y_u = 4;
     if (y>(Input.Height-5)) {
         y_d = (Input.Height-1)-y;
-        //printf("%d",y_d);
     }
     else y_d = 4;
 
     for(x = 0; x < Input.Width; x++){
-        //if (y==0) printf("%d %d %d\n",x*3,x*3+1,x*3+2);
         // Check to see if we are close to left/right of image
         if (x<4){
             x_l = x;
@@ -151,9 +149,11 @@ int main(int argc, char** argv){
 
         for (yi=0;yi<y_length;yi++){        // Copy data
             for (xi=0;xi<x_length;xi++){
-                r_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*x-x_l+xi*3];
-                g_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*x-x_l+xi*3+1];
-                b_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*x-x_l+xi*3+2];
+                //Pixel points to R value of the pixel, +1 for G, +2 for B
+                //Note the time 3 on the x index as each pixel has 3 components
+                r_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)];
+                g_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)+1];
+                b_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)+2];
             }
         }
     Output.Rows[y][3*x] = bubble_med(r_arr,y_length*x_length);
@@ -161,7 +161,7 @@ int main(int argc, char** argv){
     Output.Rows[y][3*x+2] = bubble_med(b_arr,y_length*x_length);
     }
  }
- printf("Time for median = %lg s\n\n", (double)toc());
+ printf("Time for filter = %lg s\n\n", (double)toc());
 
  // Spawn threads...
  int       Thread_ID[Thread_Count]; // Structure to keep the tread ID
