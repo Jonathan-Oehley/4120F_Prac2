@@ -63,7 +63,7 @@ int main(int argc, char** argv){
  pthread_mutex_init(&Mutex, 0);
 
  // Read the input image
- if(!Input.Read("Data/greatwall.jpg")){
+ if(!Input.Read("Data/fly.jpg")){
   printf("Cannot read image\n");
   return -1;
  }
@@ -96,26 +96,27 @@ int main(int argc, char** argv){
  }
 
  // Testing
- printf("Output components # is: %d (3 if RGB)\n", Output.Components);
- Output.Rows[0][0] = 156;
- printf("Output [0][0] R,G,B is: %d,%d,%d\n", Output.Rows[0][0],Output.Rows[0][1],Output.Rows[0][2]);
+ // printf("Output components # is: %d (3 if RGB)\n", Output.Components);
+ // Output.Rows[0][0] = 156;
+ // printf("Output [0][0] R,G,B is: %d,%d,%d\n", Output.Rows[0][0],Output.Rows[0][1],Output.Rows[0][2]);
 
- int test_arr1 [7] = {1,2,3,4,5,6,7};
- for (int k =0;k<7;k++){
-    printf("%d",test_arr1[k]);
- }
- printf("\n");
+ int test_arr1 [9] = {1,2,3,4,5,6,7,8,9};
+// for (int i=0;i<9;i++){
+//    printf("%d ",test_arr1[i]);
+// }
  int test_arr2 [6] = {1,2,3,4,5,6};
- printf("Median 1 is %d\n",bubble_med(test_arr1,7));
- printf("Median 2 is %d",bubble_med(test_arr2,6));
+// printf("Median 1 is %d\n",bubble_med(test_arr1,7));
+// printf("Median 2 is %d",bubble_med(test_arr2,6));
 
  printf("\n\n");
 
  // Implement Median Filter
+ printf("Starting filter\n");
+ printf("Input.Width is %d\n",Input.Width);
  tic();
- x, y = 0;
- int y_u,y_d,x_l, x_r; // Bounds on the columns/rows when constructing the data array for sorting
+ int y_u,y_d,x_l, x_r, y_length,x_length,yi,xi; // Bounds on the columns/rows when constructing the data array for sorting
  for(y = 0; y < Input.Height; y++){
+    // Check to see if we are close to top/bottom of image
     if (y<4){
         y_u = y;
         //printf("%d",y_u);
@@ -127,10 +128,40 @@ int main(int argc, char** argv){
     }
     else y_d = 4;
 
-    for(x = 0; x < Input.Width*Input.Components; x++){
+    for(x = 0; x < Input.Width; x++){
+        //if (y==0) printf("%d %d %d\n",x*3,x*3+1,x*3+2);
+        // Check to see if we are close to left/right of image
+        if (x<4){
+            x_l = x;
+            //printf("%d",x_l);
+        }
+        else x_l = 4;
+        if (x>(Input.Width-5)) {
+            x_r = (Input.Width-1)-x;
+            //printf("%d",x_r);
+        }
+        else x_r = 4;
+
+        // Copy area of image to find median of
+        y_length = 1+y_u + y_d;                 // Height and width of area
+        x_length = 1+x_r + x_l;
+        int r_arr[y_length*x_length] = {};       // RGB 1D arrays
+        int g_arr[y_length*x_length] = {};
+        int b_arr[y_length*x_length] = {};
+
+        for (yi=0;yi<y_length;yi++){        // Copy data
+            for (xi=0;xi<x_length;xi++){
+                r_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*x-x_l+xi*3];
+                g_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*x-x_l+xi*3+1];
+                b_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*x-x_l+xi*3+2];
+            }
+        }
+    Output.Rows[y][3*x] = bubble_med(r_arr,y_length*x_length);
+    Output.Rows[y][3*x+1] = bubble_med(g_arr,y_length*x_length);
+    Output.Rows[y][3*x+2] = bubble_med(b_arr,y_length*x_length);
     }
  }
- printf("\n");
+ printf("Time for median = %lg s\n\n", (double)toc());
 
  // Spawn threads...
  int       Thread_ID[Thread_Count]; // Structure to keep the tread ID
