@@ -1,17 +1,18 @@
+% !TeX spellcheck = en_GB 
 \section{Methodology}
-This investigation compared results from two different implementations of the median filter. The outer edge-case pixels were calculated by the follwowing means:
+This investigation compared results from two different implementations of the median filter. The outer edge-case pixels were calculated by the following means:
 
 \subsection{Golden Measure}
 The golden measure was created as a relatively simple block of code that's main objective was to be a working model. From this, further implementation could be compared and a comparison drawn.
 
-The golden measure implemented a simple bubble sort. While not the quickest sorting technique, the bubble sort is easy to code and understanded. Therefore, we were able to implement the filter relatively quickly in this manner.
+The golden measure implemented a simple bubble sort. While not the quickest sorting technique, the bubble sort is easy to code and understand. Therefore, it was possible to implement the filter relatively quickly in this manner.
 
 \subsection{Multi-thread Implementation}
 This implementation looked to improve the execution time of the golden measure. This was done using two techniques. 
 
-Firstly, instead of implementing a bubble sort we implemented the more complex ... sorting algorithm. While more difficult to code, this sorting technique performs better on average than the bubble sort in this type of application
+Firstly, instead of implementing a bubble sort the more complex ... sorting algorithm was implemented. While more difficult to code, this sorting technique performs better on average than the bubble sort in this type of application
 
-Secondly, we converted the golden measure implementation into a multi-threaded application. This was done through data-partioning of the image. The image was partioned by .... This allows the data sorting tasks to be split up over multiple processors to increase the overall execution time of the application
+Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partioning of the image. The image was partioned by .... This allows the data sorting tasks to be split up over multiple processors to increase the overall execution time of the application
 
   
 \subsection{Experiment Procedure}
