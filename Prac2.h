@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #define HAVE_STRUCT_TIMESPEC
 #include <pthread.h>
+#include <algorithm>
 //------------------------------------------------------------------------------
 
 #include "Tools/JPEG.h"

@@ -1,52 +1,18 @@
 \section{Methodology}
-In this section you should describe the method of the experiment.
+This investigation compared results from two different implementations of the median filter. The outer edge-case pixels were calculated by the follwowing means:
 
-\subsection{Hardware}
-Include detail such as the hardware used.  It's generally a good idea to include a block diagram at this point, such as the one presented in Fig.~\ref{fig:RS-232_Test}.  This figure was drawn in \href{http://www.inkscape.org/}{InkScape}~\cite{InkScape}.  When you want to import an InkScape figure (SVG format) into \LaTeX{}, simply save it to PDF (use the drawing extents as the media box area) and include the figure.
+\subsection{Golden Measure}
+The golden measure was created as a relatively simple block of code that's main objective was to be a working model. From this, further implementation could be compared and a comparison drawn.
 
-\Figure{Test setup used to test the implementation~\cite{Taylor_2016}.}{RS-232_Test}
+The golden measure implemented a simple bubble sort. While not the quickest sorting technique, the bubble sort is easy to code and understanded. Therefore, we were able to implement the filter relatively quickly in this manner.
 
-\subsection{Implementation}
-Also mention the implementation source code:
+\subsection{Multi-thread Implementation}
+This implementation looked to improve the execution time of the golden measure. This was done using two techniques. 
 
-\begin{Matlab}
-# You can include inline Matlab / Octave code
-x = linspace(0, 2*pi, 1000);
-y = sin(x);
-plot(x, y); grid on;
-\end{Matlab}
+Firstly, instead of implementing a bubble sort we implemented the more complex ... sorting algorithm. While more difficult to code, this sorting technique performs better on average than the bubble sort in this type of application
 
-or you could turn it into a float: see listing~\ref{lst:OpenCL_Matrix_Mult}.  Floats are tables, figures and listings that appear at a different place than in the source code.  This template is set up to put floats at the top of the next column, as prescribed by the IEEE article specification.
+Secondly, we converted the golden measure implementation into a multi-threaded application. This was done through data-partioning of the image. The image was partioned by .... This allows the data sorting tasks to be split up over multiple processors to increase the overall execution time of the application
 
-\begin{OpenCL_float}{OpenCL kernel to perform matrix multiplication}{OpenCL_Matrix_Mult}
-__kernel void Multiply(
- __global float* A, // Global input buffer
- __global float* B, // Global input buffer
- __global float* Y, // Global output buffer
-   const  int    N  // Global uniform
-){
- const int i = get_global_id(0); // 1st dimension index
- const int j = get_global_id(1); // 2nd dimension index
-
- // Private variables
- int   k;
- float f = 0.0;
-
- // Kernel body
- for(k = 0; k < N; k++) f += A[i*N + k] * B[k*N + j];
- Y[i*N + j] = f;
-}
-\end{OpenCL_float}
-
-Only list what is relevant.  Don't give too much detail - just enough to show what you've done.  This template supports the following languages:
-
-\begin{itemize}
- \item Matlab (Octave)
- \item GLSL
- \item OpenCL
- \item Verilog
- \item C++ (use the name ``Cpp'')
-\end{itemize}
   
 \subsection{Experiment Procedure}
 Furthermore, include detail relating to the experiment itself: what did you do, in what order was this done, why was this done, etc.  What are you trying to prove / disprove?
