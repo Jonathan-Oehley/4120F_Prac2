@@ -1,7 +1,7 @@
 \BOOKMARK [1][-]{section.1}{I Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{II Methodology}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{II-A Hardware}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{II-B Implementation}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.1}{II-A Golden Measure}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{II-B Multi-thread Implementation}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{II-C Experiment Procedure}{section.2}% 5
 \BOOKMARK [1][-]{section.3}{III Results}{}% 6
 \BOOKMARK [2][-]{subsection.3.1}{III-A Figures}{section.3}% 7

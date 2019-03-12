@@ -1,12 +1,13 @@
 # depslib dependency file v1.0
-1552140297 source:d:\university\4th_year\eee4120f\prac_2\4120f_prac2\prac2.cpp
+1552394645 source:d:\university\4th_year\eee4120f\prac_2\4120f_prac2\prac2.cpp
 	"Prac2.h"
 
-1552140297 d:\university\4th_year\eee4120f\prac_2\4120f_prac2\prac2.h
+1552383647 d:\university\4th_year\eee4120f\prac_2\4120f_prac2\prac2.h
 	<math.h>
 	<stdio.h>
 	<stdlib.h>
 	<pthread.h>
+	<algorithm>
 	"Tools/JPEG.h"
 	"Tools/Timer.h"
 
