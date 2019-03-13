@@ -89,11 +89,14 @@ int main(int argc, char** argv){
  // Copy Image File
  tic();
  int x, y;
- for(y = 0; y < Input.Height; y++){
+
+ //Removed copy script as it is unneccesary
+
+ /*for(y = 0; y < Input.Height; y++){
   for(x = 0; x < Input.Width*Input.Components; x++){
    Output.Rows[y][x] = Input.Rows[y][x];
   }
- }
+ }*/
 
  // Testing
  // printf("Output components # is: %d (3 if RGB)\n", Output.Components);
@@ -187,7 +190,7 @@ int main(int argc, char** argv){
   }
  }
 
- // No more active threads, so no more critical sections required
+  // No more active threads, so no more critical sections required
  printf("All threads have quit\n");
  printf("Time taken for threads to run = %lg ms\n", toc()/1e-3);
 
