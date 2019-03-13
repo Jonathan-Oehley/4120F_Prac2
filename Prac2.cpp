@@ -21,18 +21,40 @@
 #include "Prac2.h"
 //------------------------------------------------------------------------------
 
+
+//This is a select filter that only sorts halfway to optimise speeds
+int select_med(int start[], int length){
+    int i,j,lownumindex;
+    for(j=0;j<ceil(length/2)+1;j++){
+        lownumindex = j;
+        for(i=j+1;i<length;i++){
+            if (start[i]<start[lownumindex]){
+                lownumindex = i;
+            }
+        }
+        std::swap(start[lownumindex],start[j]);
+        //printf("swapped %d and %d, element ", start[i],start[j], j, start[lownumindex])
+    }
+    if (length%2==0){
+        return (int)(start[length/2]+start[length/2-1])/2;
+    }
+    else{
+        return start[(int)length/2];
+    }
+}
+
 // This is each thread's "main" function.  It receives a unique ID
 void* Thread_Main(void* Parameter){
- //int ID = *((int*)Parameter);
+ int ID = *((int*)Parameter);
 
  pthread_mutex_lock(&Mutex);
-  //printf("Hello from thread %d\n", ID);
+  printf("Hello from thread %d\n", ID);
  pthread_mutex_unlock(&Mutex);
 
  for(int j = 0; j < 1e6; j++); // Do some heavy calculation
 
  pthread_mutex_lock(&Mutex);
-  //printf("Thread %d: I QUIT!\n", ID);
+  printf("Thread %d: I QUIT!\n", ID);
  pthread_mutex_unlock(&Mutex);
 
  return 0;
@@ -89,25 +111,29 @@ int main(int argc, char** argv){
  // Copy Image File
  tic();
  int x, y;
+
+//removed copying as it was unneccesary
+/*
  for(y = 0; y < Input.Height; y++){
   for(x = 0; x < Input.Width*Input.Components; x++){
    Output.Rows[y][x] = Input.Rows[y][x];
   }
  }
+ */
 
- // Testing
- // printf("Output components # is: %d (3 if RGB)\n", Output.Components);
- // Output.Rows[0][0] = 156;
- // printf("Output [0][0] R,G,B is: %d,%d,%d\n", Output.Rows[0][0],Output.Rows[0][1],Output.Rows[0][2]);
-
-// int test_arr1 [9] = {1,2,3,4,5,6,7,8,9};
+  //Testing
+//  printf("Output components # is: %d (3 if RGB)\n", Output.Components);
+//  Output.Rows[0][0] = 156;
+//  printf("Output [0][0] R,G,B is: %d,%d,%d\n", Output.Rows[0][0],Output.Rows[0][1],Output.Rows[0][2]);
+//
+// int test_arr1 [9] = {1,2,6,6,5,6,7,8,9};
 // for (int i=0;i<9;i++){
 //    printf("%d ",test_arr1[i]);
 // }
 // int test_arr2 [6] = {1,2,3,4,5,6};
-// printf("Median 1 is %d\n",bubble_med(test_arr1,7));
-// printf("Median 2 is %d",bubble_med(test_arr2,6));
-
+// printf("\nMedian 1 is %d\n",select_med(test_arr1,9));
+// printf("Median 2 is %d",select_med(test_arr2,6));
+//
 // printf("\n\n");
 
  // Implement Median Filter
@@ -174,7 +200,7 @@ int main(int argc, char** argv){
 
  // Printing stuff is a critical section...
  pthread_mutex_lock(&Mutex);
-  //printf("Threads created :-)\n");
+  printf("Threads created.\n");
  pthread_mutex_unlock(&Mutex);
 
  tic();
