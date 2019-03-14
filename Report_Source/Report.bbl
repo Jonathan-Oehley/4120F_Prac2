@@ -21,6 +21,10 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{NSP}
+G.~R. Arce, \emph{{Nonlinear Signal Processing: A Statistical Approach}}.\hskip
+  1em plus 0.5em minus 0.4em\relax John Wiley and Sons, 2005.
+
 \bibitem{Taylor_2016}
 J.~Taylor and J.~G. Hoole, ``{Robust Protocol for Sending Synchronisation Pulse
   and RS-232 Communication over Single Low Quality Twisted Pair Cable},'' in

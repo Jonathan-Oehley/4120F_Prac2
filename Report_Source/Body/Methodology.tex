@@ -1,19 +1,18 @@
 % !TeX spellcheck = en_GB 
 \section{Methodology}
-This investigation compared results from two different implementations of the median filter. The outer edge-case pixels were calculated by the following means:
+The implementation of a median filter requires some definition around the pixels near the edge of an image. The outer edge-case pixels were calculated by the following means; the area over which the pixel component values were compared with to determine the median was simply truncated by the edge of the image. In other words, for the pixels in the furthest corners, the area over which the median was determined was 5 x 5 pixels.
 
 \subsection{Golden Measure}
 The golden measure was created as a relatively simple block of code that's main objective was to be a working model. From this, further implementation could be compared and a comparison drawn.
 
-The golden measure implemented a simple bubble sort. While not the quickest sorting technique, the bubble sort is easy to code and understand. Therefore, it was possible to implement the filter relatively quickly in this manner.
+The golden measure sorting method was implemented as a simple bubble sort. While not the quickest sorting technique, the bubble sort is easy to code and understand. Therefore, it was possible to implement the sorting method relatively quickly in this manner. The filter was simply implemented by flattening the 2 dimensional comparison area, into a single array before passing it to the sorting algorithm to determine the median.
 
 \subsection{Multi-thread Implementation}
 This implementation looked to improve the execution time of the golden measure. This was done using two techniques. 
 
-Firstly, instead of implementing a bubble sort the more complex ... sorting algorithm was implemented. While more difficult to code, this sorting technique performs better on average than the bubble sort in this type of application
+Firstly, instead of implementing a bubble sort the more complex select sort algorithm was implemented. While more difficult to code, this sorting technique performs better on average than the bubble sort in this type of application. It is of particular note that the reason the selection sort particularly performs better in this application, is due to the fact that the algorithm needs only to sort half of the data in order to find the median.
 
-Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partioning of the image. The image was partioned by .... This allows the data sorting tasks to be split up over multiple processors to increase the overall execution time of the application
-
+Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partioning of the image into columns. This allows the data sorting tasks to be split up over multiple processors to increase the overall execution time of the application
   
 \subsection{Experiment Procedure}
 Furthermore, include detail relating to the experiment itself: what did you do, in what order was this done, why was this done, etc.  What are you trying to prove / disprove?
