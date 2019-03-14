@@ -68,7 +68,7 @@ int bubble_med(int start[], int length){
 }
 
 // Filter function
-void median_filter(JPEG* input, JPEG* output, int y, int x, int y_end, int x_end){
+void median_filter(JPEG* input, JPEG* output, int y, int x, int y_end, int x_end, int (*med_sort)(int[], int)){
  JPEG Input = *input;
  JPEG Output = *output;
 
@@ -115,9 +115,9 @@ void median_filter(JPEG* input, JPEG* output, int y, int x, int y_end, int x_end
                 b_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)+2];
             }
         }
-    Output.Rows[y][3*x] = bubble_med(r_arr,y_length*x_length);
-    Output.Rows[y][3*x+1] = bubble_med(g_arr,y_length*x_length);
-    Output.Rows[y][3*x+2] = bubble_med(b_arr,y_length*x_length);
+    Output.Rows[y][3*x] = med_sort(r_arr,y_length*x_length);
+    Output.Rows[y][3*x+1] = med_sort(g_arr,y_length*x_length);
+    Output.Rows[y][3*x+2] = med_sort(b_arr,y_length*x_length);
     }
  }
 
@@ -129,7 +129,7 @@ void* Thread_Main(void* Parameter){
  JPEG input = *params.pic_in;
  JPEG output = *params.pic_out;
 
- median_filter(params.pic_in,params.pic_out,params.y_start,params.x_start,params.y_end,params.x_end);
+ median_filter(params.pic_in,params.pic_out,params.y_start,params.x_start,params.y_end,params.x_end,select_med);
 
  pthread_mutex_lock(&Mutex);
  printf("Hello from thread %d with y_start %d and y_end %d\n and in 0/0 is: %d\n", params.ID, params.y_start, params.y_end, input.Rows[0][0]);
@@ -192,7 +192,7 @@ int main(int argc, char** argv){
  // Implement Median Filter
  printf("Starting filter\n");
  tic();
- median_filter(&Input,&Output,0,0,Input.Height,Input.Width);
+ median_filter(&Input,&Output,0,0,Input.Height,Input.Width,bubble_med);
  printf("Time for golden standard filter = %lg s\n\n", (double)toc());
 
   // Write the output image
