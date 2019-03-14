@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2018.4.21)  12 MAR 2019 21:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2018.4.21)  14 MAR 2019 21:47
 entering extended mode
 **./Report.tex
 (Report.tex
@@ -500,17 +500,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 15--16
 []\OT1/ptm/m/n/10 Secondly, the golden mea-sure im-ple-men-ta-tion was
  []
 
-
-Underfull \hbox (badness 2922) in paragraph at lines 15--16
-\OT1/ptm/m/n/10 through data-partioning of the im-age. The im-age was
- []
-
 ) (Body/Results.tex
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 6.
  ("D:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-<Figures/r_vs_N;_f=0_0005;_P=90.pdf, id=55, 578.16pt x 289.08pt>
+<Figures/r_vs_N;_f=0_0005;_P=90.pdf, id=56, 578.16pt x 289.08pt>
 File: Figures/r_vs_N;_f=0_0005;_P=90.pdf Graphic file (type pdf)
 
 <use Figures/r_vs_N;_f=0_0005;_P=90.pdf>
@@ -527,7 +522,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 29.
 
-<Figures/Line_Signals.pdf, id=56, 284.06125pt x 128.48pt>
+<Figures/Line_Signals.pdf, id=57, 284.06125pt x 128.48pt>
 File: Figures/Line_Signals.pdf Graphic file (type pdf)
 
 <use Figures/Line_Signals.pdf>
@@ -538,10 +533,11 @@ Underfull \hbox (badness 1997) in paragraph at lines 49--50
 []\OT1/ptm/m/n/10 Always re-mem-ber to in-clude axes text, units and a
  []
 
-) (Body/Conclusion.tex [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
+[1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
-]) (Report.bbl)
+]) (Body/Conclusion.tex)
+(Report.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -568,13 +564,13 @@ Package rerunfilecheck Info: File `Report.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 37.
  ) 
 Here is how much of TeX's memory you used:
- 8669 strings out of 493323
- 131288 string characters out of 3139066
+ 8671 strings out of 493323
+ 131301 string characters out of 3139066
  378863 words of memory out of 3000000
- 12021 multiletter control sequences out of 15000+200000
+ 12022 multiletter control sequences out of 15000+200000
  45706 words of font info for 85 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,9n,42p,535b,1985s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,9n,42p,535b,1987s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<D:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/Program Files/MiKTeX 2.9
 /fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Program Files/MiKTeX 2.9/fonts/t
@@ -588,9 +584,9 @@ Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><D:/Program Files/MiKTeX 2.
 urw/times/utmb8a.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a
 .pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><D:/Program 
 Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Report.pdf (2 pages, 236292 bytes).
+Output written on Report.pdf (2 pages, 238879 bytes).
 PDF statistics:
- 218 PDF objects out of 1000 (max. 8388607)
- 56 named destinations out of 1000 (max. 500000)
+ 220 PDF objects out of 1000 (max. 8388607)
+ 57 named destinations out of 1000 (max. 500000)
  107 words of extra memory for PDF output out of 10000 (max. 10000000)
 
