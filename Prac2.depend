@@ -36,3 +36,40 @@
 	<windows.h>
 	<time.h>
 
+1552164003 source:d:\university\eee4120f\codeblocks\prac 2\tools\jpeg.cpp
+	"JPEG.h"
+
+1552164003 d:\university\eee4120f\codeblocks\prac 2\tools\jpeg.h
+	<stdio.h>
+	"jpeglib.h"
+
+1552164003 d:\university\eee4120f\codeblocks\prac 2\tools\jpeglib.h
+	"jconfig.h"
+	"jmorecfg.h"
+	"jpegint.h"
+	"jerror.h"
+
+1552164003 d:\university\eee4120f\codeblocks\prac 2\tools\jconfig.h
+
+1552164003 d:\university\eee4120f\codeblocks\prac 2\tools\jmorecfg.h
+
+1552164003 source:d:\university\eee4120f\codeblocks\prac 2\tools\timer.cpp
+	"Timer.h"
+	<windows.h>
+	<time.h>
+
+1552164003 d:\university\eee4120f\codeblocks\prac 2\tools\timer.h
+	<stdio.h>
+
+1552551857 source:d:\university\eee4120f\codeblocks\prac 2\prac2.cpp
+	"Prac2.h"
+
+1552497549 d:\university\eee4120f\codeblocks\prac 2\prac2.h
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<algorithm>
+	"Tools/JPEG.h"
+	"Tools/Timer.h"
+
