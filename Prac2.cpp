@@ -21,6 +21,13 @@
 #include "Prac2.h"
 //------------------------------------------------------------------------------
 
+//Structure for dividing work for pthreads
+struct allocation
+{
+    int x_start, y_start, x_end, y_end, ID;
+    pthread_t Thread;
+};
+
 
 //This is a select filter that only sorts halfway to optimise speeds
 int select_med(int start[], int length){
@@ -33,7 +40,6 @@ int select_med(int start[], int length){
             }
         }
         std::swap(start[lownumindex],start[j]);
-        //printf("swapped %d and %d, element ", start[i],start[j], j, start[lownumindex])
     }
     if (length%2==0){
         return (int)(start[length/2]+start[length/2-1])/2;
@@ -42,19 +48,20 @@ int select_med(int start[], int length){
         return start[(int)length/2];
     }
 }
+//------------------------------------------------------------------------------
 
 // This is each thread's "main" function.  It receives a unique ID
 void* Thread_Main(void* Parameter){
- int ID = *((int*)Parameter);
+ allocation params = *((allocation*)Parameter);
 
  pthread_mutex_lock(&Mutex);
-  printf("Hello from thread %d\n", ID);
+  printf("Hello from thread %d with y_start %d and y_end %d\n", params.ID, params.y_start, params.y_end);
  pthread_mutex_unlock(&Mutex);
 
  for(int j = 0; j < 1e6; j++); // Do some heavy calculation
 
  pthread_mutex_lock(&Mutex);
-  printf("Thread %d: I QUIT!\n", ID);
+  printf("Thread %d: I QUIT!\n", params.ID);
  pthread_mutex_unlock(&Mutex);
 
  return 0;
@@ -187,16 +194,53 @@ int main(int argc, char** argv){
     Output.Rows[y][3*x+2] = bubble_med(b_arr,y_length*x_length);
     }
  }
- printf("Time for filter = %lg s\n\n", (double)toc());
+ printf("Time for golden standard filter = %lg s\n\n", (double)toc());
 
- // Spawn threads...
- int       Thread_ID[Thread_Count]; // Structure to keep the tread ID
- pthread_t Thread   [Thread_Count]; // pThreads structure for thread admin
-
- for(j = 0; j < Thread_Count; j++){
-  Thread_ID[j] = j;
-  pthread_create(Thread+j, 0, Thread_Main, Thread_ID+j);
+  // Write the output image
+ if(!Output.Write("Data/Output_GoldStandard.jpg")){
+  printf("Cannot write image\n");
+  return -3;
  }
+
+ int Thread_Count = 16;
+ // Spawn threads...
+ allocation Threads [Thread_Count]; // Structure to keep the tread information
+
+// Splitting by row:
+ int thread_split_y = floor(Input.Height/Thread_Count);
+
+ //split by column
+ int thread_split_x = floor(Input.Width/Thread_Count);
+
+ for(j = 0; j < Thread_Count-1; j++){ //create threads and allocate them a workload
+
+    //Comment out one of the below Blocks and the corresponding block below
+
+//    Threads[j].x_start = thread_split_x*j;
+//    Threads[j].x_end = thread_split_x*(j-1)-1;
+//    Threads[j].y_start = 0;
+//    Threads[j].y_end = Input.Height-1;
+
+    Threads[j].x_start = 0;
+    Threads[j].x_end = Input.Width-1;
+    Threads[j].y_start = thread_split_y*j;
+    Threads[j].y_end = thread_split_y*(j+1)-1;
+
+    Threads[j].ID = j;
+    pthread_create(&Threads[j].Thread, 0, Thread_Main, (void*)&Threads[j]);
+ }
+
+// Threads[Thread_Count-1].x_start = thread_split_x*(Thread_Count-1);
+// Threads[Thread_Count-1].y_start = 0;
+
+ Threads[Thread_Count-1].x_start = 0;
+ Threads[Thread_Count-1].y_start = thread_split_y*(Thread_Count-1);
+
+ Threads[Thread_Count-1].x_end = Input.Width-1;
+ Threads[Thread_Count-1].y_end = Input.Height-1;
+
+ Threads[Thread_Count-1].ID = j;
+ pthread_create(&Threads[Thread_Count-1].Thread, 0, Thread_Main, (void*)&Threads[Thread_Count-1]);
 
  // Printing stuff is a critical section...
  pthread_mutex_lock(&Mutex);
@@ -206,22 +250,22 @@ int main(int argc, char** argv){
  tic();
  // Wait for threads to finish
  for(j = 0; j < Thread_Count; j++){
-  if(pthread_join(Thread[j], 0)){
+  if(pthread_join(Threads[j].Thread, 0)){
    pthread_mutex_lock(&Mutex);
     printf("Problem joining thread %d\n", j);
    pthread_mutex_unlock(&Mutex);
   }
  }
 
- // No more active threads, so no more critical sections required
- printf("All threads have quit\n");
- printf("Time taken for threads to run = %lg ms\n", toc()/1e-3);
-
- // Write the output image
- if(!Output.Write("Data/Output.jpg")){
+   // Write the output image
+ if(!Output.Write("Data/Output_PThreads.jpg")){
   printf("Cannot write image\n");
   return -3;
  }
+
+ // No more active threads, so no more critical sections required
+ printf("All threads have quit\n");
+ printf("Time taken for threads to run = %lg ms\n", toc()/1e-3);
 
  // Clean-up
  pthread_mutex_destroy(&Mutex);
