@@ -24,6 +24,8 @@
 //Structure for dividing work for pthreads
 struct allocation
 {
+    JPEG *pic_in;
+    JPEG *pic_out;
     int x_start, y_start, x_end, y_end, ID;
     pthread_t Thread;
 };
@@ -50,24 +52,6 @@ int select_med(int start[], int length){
 }
 //------------------------------------------------------------------------------
 
-// This is each thread's "main" function.  It receives a unique ID
-void* Thread_Main(void* Parameter){
- allocation params = *((allocation*)Parameter);
-
- pthread_mutex_lock(&Mutex);
-  printf("Hello from thread %d with y_start %d and y_end %d\n", params.ID, params.y_start, params.y_end);
- pthread_mutex_unlock(&Mutex);
-
- for(int j = 0; j < 1e6; j++); // Do some heavy calculation
-
- pthread_mutex_lock(&Mutex);
-  printf("Thread %d: I QUIT!\n", params.ID);
- pthread_mutex_unlock(&Mutex);
-
- return 0;
-}
-//------------------------------------------------------------------------------
-
 int bubble_med(int start[], int length){
     int i,j;
     for(j=0;j<length-1;j++){
@@ -82,6 +66,82 @@ int bubble_med(int start[], int length){
         return start[(int)length/2];
     }
 }
+
+// Filter function
+void median_filter(JPEG* input, JPEG* output, int y, int x, int y_end, int x_end){
+ JPEG Input = *input;
+ JPEG Output = *output;
+
+ // Note that for loops run over the pixel indices, not the RGB values
+ int y_u,y_d,x_l, x_r; // Bounds on the columns/rows when constructing the data array for sorting
+ int y_length,x_length,yi,xi; //Bounds and indices for area to copy
+ for(y = 0; y < y_end; y++){
+    // Check to see if we are close to top/bottom of image
+    if (y<4){
+        y_u = y;
+    }
+    else y_u = 4;
+    if (y>(Input.Height-5)) {
+        y_d = (Input.Height-1)-y;
+    }
+    else y_d = 4;
+
+    for(x = 0; x < x_end; x++){
+        // Check to see if we are close to left/right of image
+        if (x<4){
+            x_l = x;
+            //printf("%d",x_l);
+        }
+        else x_l = 4;
+        if (x>(Input.Width-5)) {
+            x_r = (Input.Width-1)-x;
+            //printf("%d",x_r);
+        }
+        else x_r = 4;
+
+        // Copy area of image to find median of
+        y_length = 1+y_u + y_d;                 // Height and width of area
+        x_length = 1+x_r + x_l;
+        int r_arr[y_length*x_length] = {};       // RGB 1D arrays
+        int g_arr[y_length*x_length] = {};
+        int b_arr[y_length*x_length] = {};
+
+        for (yi=0;yi<y_length;yi++){        // Copy data
+            for (xi=0;xi<x_length;xi++){
+                //Pixel points to R value of the pixel, +1 for G, +2 for B
+                //Note the time 3 on the x index as each pixel has 3 components
+                r_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)];
+                g_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)+1];
+                b_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)+2];
+            }
+        }
+    Output.Rows[y][3*x] = bubble_med(r_arr,y_length*x_length);
+    Output.Rows[y][3*x+1] = bubble_med(g_arr,y_length*x_length);
+    Output.Rows[y][3*x+2] = bubble_med(b_arr,y_length*x_length);
+    }
+ }
+
+}
+
+// This is each thread's "main" function.  It receives a unique ID
+void* Thread_Main(void* Parameter){
+ allocation params = *((allocation*)Parameter);
+ JPEG input = *params.pic_in;
+ JPEG output = *params.pic_out;
+
+ median_filter(params.pic_in,params.pic_out,params.y_start,params.x_start,params.y_end,params.x_end);
+
+ pthread_mutex_lock(&Mutex);
+ printf("Hello from thread %d with y_start %d and y_end %d\n and in 0/0 is: %d\n", params.ID, params.y_start, params.y_end, input.Rows[0][0]);
+ pthread_mutex_unlock(&Mutex);
+
+ pthread_mutex_lock(&Mutex);
+  printf("Thread %d: I QUIT!\n", params.ID);
+ pthread_mutex_unlock(&Mutex);
+
+ return 0;
+}
+//------------------------------------------------------------------------------
 
 
 int main(int argc, char** argv){
@@ -117,7 +177,6 @@ int main(int argc, char** argv){
 
  // Copy Image File
  tic();
- int x, y;
 
 //removed copying as it was unneccesary
 /*
@@ -129,71 +188,11 @@ int main(int argc, char** argv){
  */
 
   //Testing
-//  printf("Output components # is: %d (3 if RGB)\n", Output.Components);
-//  Output.Rows[0][0] = 156;
-//  printf("Output [0][0] R,G,B is: %d,%d,%d\n", Output.Rows[0][0],Output.Rows[0][1],Output.Rows[0][2]);
-//
-// int test_arr1 [9] = {1,2,6,6,5,6,7,8,9};
-// for (int i=0;i<9;i++){
-//    printf("%d ",test_arr1[i]);
-// }
-// int test_arr2 [6] = {1,2,3,4,5,6};
-// printf("\nMedian 1 is %d\n",select_med(test_arr1,9));
-// printf("Median 2 is %d",select_med(test_arr2,6));
-//
-// printf("\n\n");
 
  // Implement Median Filter
- // Note that for loops run over the pixel indices, not the RGB values
  printf("Starting filter\n");
  tic();
- int y_u,y_d,x_l, x_r; // Bounds on the columns/rows when constructing the data array for sorting
- int y_length,x_length,yi,xi; //Bounds and indices for area to copy
- for(y = 0; y < Input.Height; y++){
-    // Check to see if we are close to top/bottom of image
-    if (y<4){
-        y_u = y;
-    }
-    else y_u = 4;
-    if (y>(Input.Height-5)) {
-        y_d = (Input.Height-1)-y;
-    }
-    else y_d = 4;
-
-    for(x = 0; x < Input.Width; x++){
-        // Check to see if we are close to left/right of image
-        if (x<4){
-            x_l = x;
-            //printf("%d",x_l);
-        }
-        else x_l = 4;
-        if (x>(Input.Width-5)) {
-            x_r = (Input.Width-1)-x;
-            //printf("%d",x_r);
-        }
-        else x_r = 4;
-
-        // Copy area of image to find median of
-        y_length = 1+y_u + y_d;                 // Height and width of area
-        x_length = 1+x_r + x_l;
-        int r_arr[y_length*x_length] = {};       // RGB 1D arrays
-        int g_arr[y_length*x_length] = {};
-        int b_arr[y_length*x_length] = {};
-
-        for (yi=0;yi<y_length;yi++){        // Copy data
-            for (xi=0;xi<x_length;xi++){
-                //Pixel points to R value of the pixel, +1 for G, +2 for B
-                //Note the time 3 on the x index as each pixel has 3 components
-                r_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)];
-                g_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)+1];
-                b_arr[yi*x_length+xi] = Input.Rows[y-y_u+yi][3*(x-x_l+xi)+2];
-            }
-        }
-    Output.Rows[y][3*x] = bubble_med(r_arr,y_length*x_length);
-    Output.Rows[y][3*x+1] = bubble_med(g_arr,y_length*x_length);
-    Output.Rows[y][3*x+2] = bubble_med(b_arr,y_length*x_length);
-    }
- }
+ median_filter(&Input,&Output,0,0,Input.Height,Input.Width);
  printf("Time for golden standard filter = %lg s\n\n", (double)toc());
 
   // Write the output image
@@ -226,6 +225,9 @@ int main(int argc, char** argv){
     Threads[j].y_start = thread_split_y*j;
     Threads[j].y_end = thread_split_y*(j+1)-1;
 
+    Threads[j].pic_in = &Input;
+    Threads[j].pic_out = &Output;
+
     Threads[j].ID = j;
     pthread_create(&Threads[j].Thread, 0, Thread_Main, (void*)&Threads[j]);
  }
@@ -239,7 +241,9 @@ int main(int argc, char** argv){
  Threads[Thread_Count-1].x_end = Input.Width-1;
  Threads[Thread_Count-1].y_end = Input.Height-1;
 
- Threads[Thread_Count-1].ID = j;
+ Threads[j].pic_in = &Input;
+ Threads[j].pic_out = &Output;
+ Threads[Thread_Count-1].ID = Thread_Count-1;
  pthread_create(&Threads[Thread_Count-1].Thread, 0, Thread_Main, (void*)&Threads[Thread_Count-1]);
 
  // Printing stuff is a critical section...
