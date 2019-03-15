@@ -18,3 +18,16 @@ Secondly, the golden measure implementation was converted into a multi-threaded 
 The program was coded using a shared git repository to allow collaboration between the two students. The code was tested periodically to ensure functionality of each function.
 
 Testing was conducted by running the program a few times to ensure that it was stored in cache before taking readings. Then the program was run with different inputs, number of threads and sorting functions. The execution time for each case was measured for multiple runs of the program and averaged across them. This generates a single value for the execution time of the program with those parameters.
+
+A number of jpg images were used for testing. These were of various sizes and are described in Table~\ref{tab:Image dimensions}. These are of note as the resulting execution times were directly related to the size of the image.
+
+\Table{Image dimensions\label{tab:Image dimensions}}{lccr}{ 
+	\textbf{} & \textbf{Height} & \textbf{Width} & \textbf{Pixels E+3} 
+}{
+	Greatwall.jpg & 2560 & 1920 & 4915 \\
+	Fly.jpg & 1024 & 821 & 841 \\
+	Alan.jpg & 640 & 640 & 410 \\	
+	Small.jpg & 304 & 300 & 91 \\
+}
+{Example}
+
