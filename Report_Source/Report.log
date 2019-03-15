@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.3.15)  15 MAR 2019 16:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.3.15)  15 MAR 2019 21:07
 entering extended mode
 **./Report.tex
 (Report.tex
@@ -534,6 +534,9 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 
 LaTeX Warning: Label `tab:Example' multiply defined.
 
+
+LaTeX Warning: Label `tab:Example' multiply defined.
+
 )
 \openout1 = `Report.aux'.
 
@@ -628,49 +631,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 15--16
 []\OT1/ptm/m/n/10 Secondly, the golden mea-sure im-ple-men-ta-tion was
  []
 
-) (Body/Results.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 12.
+(Font)              <8> on input line 32.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 12.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 24.
+(Font)              <6> on input line 32.
+) (Body/Results.tex [1{C:/Users/Lolarent000/AppData/Local/MiKTeX/2.9/pdftex/con
+fig/pdftex.map}
 
-("C:\Users\Lolarent000\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1pc
-r.fd"
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-<Figures/r_vs_N;_f=0_0005;_P=90.pdf, id=56, 578.16pt x 289.08pt>
-File: Figures/r_vs_N;_f=0_0005;_P=90.pdf Graphic file (type pdf)
-<use Figures/r_vs_N;_f=0_0005;_P=90.pdf>
-Package pdftex.def Info: Figures/r_vs_N;_f=0_0005;_P=90.pdf  used on input line
- 26.
-(pdftex.def)             Requested size: 201.60077pt x 100.80016pt.
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 30.
 
-("C:\Users\Lolarent000\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1pc
-r.fd"
-File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-)
-<Figures/Line_Signals.pdf, id=57, 284.06125pt x 128.48pt>
-File: Figures/Line_Signals.pdf Graphic file (type pdf)
-<use Figures/Line_Signals.pdf>
-Package pdftex.def Info: Figures/Line_Signals.pdf  used on input line 65.
-(pdftex.def)             Requested size: 201.60077pt x 91.18614pt.
-
-Underfull \hbox (badness 1997) in paragraph at lines 67--68
-[]\OT1/ptm/m/n/10 Always re-mem-ber to in-clude axes text, units and a
+]
+Overfull \hbox (1.39778pt too wide) in paragraph at lines 33--33
+ [][] 
  []
 
-[1{C:/Users/Lolarent000/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
-
-
-])
-(Body/Conclusion.tex) (Report.bbl [2 <./Figures/r_vs_N;_f=0_0005;_P=90.pdf> <./
-Figures/Line_Signals.pdf
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Line_Signals.pdf): PDF inclusion: 
-multiple pdfs with page group included in a single page
->])
+<Figures/Speed_Up_Graph.png, id=60, 421.575pt x 316.0608pt>
+File: Figures/Speed_Up_Graph.png Graphic file (type png)
+<use Figures/Speed_Up_Graph.png>
+Package pdftex.def Info: Figures/Speed_Up_Graph.png  used on input line 35.
+(pdftex.def)             Requested size: 252.0pt x 188.929pt.
+) (Body/Conclusion.tex) (Report.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -683,15 +662,13 @@ Before submitting the final camera ready copy, remember to:
  process uses the appropriate paper size.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 37.
-[3
-
-]
+[2 <./Figures/Speed_Up_Graph.png (PNG copy)>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 37.
  (Report.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 37.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 37.
 Package rerunfilecheck Info: File `Report.out' has not changed.
-(rerunfilecheck)             Checksum: F94EB1F554BBD6DF4A7FF29B14B1ED08;739.
+(rerunfilecheck)             Checksum: C495CEB021D8E2571587E1B1227182FD;625.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -699,34 +676,23 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 37.
  ) 
 Here is how much of TeX's memory you used:
- 9010 strings out of 492946
- 136871 string characters out of 3123602
- 384512 words of memory out of 3000000
- 12714 multiletter control sequences out of 15000+200000
- 45706 words of font info for 85 fonts, out of 3000000 for 9000
+ 8057 strings out of 492946
+ 126560 string characters out of 3123602
+ 326512 words of memory out of 3000000
+ 11817 multiletter control sequences out of 15000+200000
+ 41267 words of font info for 75 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,9n,42p,535b,2112s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,9n,32p,472b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/
 8r.enc}<C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmex10.pfb><C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Lolarent000/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Lolare
-nt000/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pf
-b><C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmr5.pfb><C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Lolarent000/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Lolarent000/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Us
-ers/Lolarent000/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8
-a.pfb><C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/c
-ourier/ucrro8a.pfb><C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2.9/font
-s/type1/urw/times/utmb8a.pfb><C:/Users/Lolarent000/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Lolarent000/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Lolarent000/AppData
-/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Report.pdf (3 pages, 240362 bytes).
+ic/amsfonts/cm/cmsy7.pfb><C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Lolarent000/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Lolarent000/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Lolarent000/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Report.pdf (2 pages, 106040 bytes).
 PDF statistics:
- 226 PDF objects out of 1000 (max. 8388607)
- 60 named destinations out of 1000 (max. 500000)
- 107 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 90 PDF objects out of 1000 (max. 8388607)
+ 18 named destinations out of 1000 (max. 500000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

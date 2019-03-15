@@ -12,7 +12,7 @@ This implementation looked to improve the execution time of the golden measure. 
 
 Firstly, instead of implementing a bubble sort by default, a investigation was made between bubble sort, a select sort function (which only sorted just above halfway to get the median) and the hybrid sort function (std::sort()) built into c++. The fastest sorting method was used in this implementation which will be discussed in the Results section.
 
-Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partitioning of the image into rows. This allows the data sorting tasks to be split up over multiple processors to decrease the overall execution time of the application
+Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partitioning of the image into rows. This allows the data sorting tasks to be split up over multiple processors to decrease the overall execution time of the application. No mutex was required as each pixel of the output jpeg is only written to once.
   
 \subsection{Experiment Procedure}
 The program was coded using a shared git repository to allow collaboration between the two students. The code was tested periodically to ensure functionality of each function.
@@ -22,7 +22,7 @@ Testing was conducted by running the program a few times to ensure that it was s
 A number of jpg images were used for testing. These were of various sizes and are described in Table~\ref{tab:Image dimensions}. These are of note as the resulting execution times were directly related to the size of the image.
 
 \Table{Image dimensions\label{tab:Image dimensions}}{lccr}{ 
-	\textbf{} & \textbf{Height} & \textbf{Width} & \textbf{Pixels E+3} 
+	\textbf{} & \textbf{Height (Pixels)} & \textbf{Width (Pixels)} & \textbf{Pixels E+3} 
 }{
 	Greatwall.jpg & 2560 & 1920 & 4915 \\
 	Fly.jpg & 1024 & 821 & 841 \\
