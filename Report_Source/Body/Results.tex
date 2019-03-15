@@ -1,6 +1,10 @@
 % !TeX spellcheck = en_GB 
 \section{Results}
 
+\Figure[width=0.9\columnwidth]{Input Images and Output Filtered Images\label{fig:Output}}{Report}
+
+The images shown below in Figure~\ref{fig:Output} are the input jpeg images on the left and the filtered outputs on the right. These are examples of the working median filter implemented. The Median Filter was successful and resulted in blurred images as shown in Figure~\ref{fig:Output}. This is the amount of blurring that was expected from a 9x9 median filter so it appears that the filter itself works.
+
 All values of execution times are averages of at least 3 different measurements. The speed-up is calculated as the baseline (either the Golden Measure or Bubble Sort) divided by the new speed achieved. speed-up can be read as the compared value is speed-up times faster than the baseline.
 
 \subsection{Sorting Algorithms}
@@ -16,6 +20,15 @@ The first comparison drawn was the difference in executing times of the median f
 	Speed-Up & 1.00 & 3.01 & 5.25 \\
 }{Example}
 
+\Table{Golden Measure vs Multi-threaded Comparison\label{tab:GMvMT}}{lccr}{ 
+	\textbf{} & \textbf{Golden Measure (s)} & \textbf{Multi-Threaded(s)} & \textbf{Speed-Up} 
+}{
+	Greatwall.jpg & 133,48 & 4.71 & 28.37 \\
+	Fly.jpg & 19.18 & 0.72 & 26.51 \\
+	Small.jpg  & 1.33 & 0.04 & 34.34 \\
+	Average &  &  & 29.74 \\
+}{Example}
+
 The Select sort was significantly more efficient and the ability to stop halfway through sorting to get the median sped it up a lot but the select algorithm itself isn't particularly efficient so that slows it down.
 The std::sort method inbuilt to c++ is a hybrid function using much more efficient algorithms and therefore it is the fastest and was used in the final measurement for the multi-threaded implementation. 
 
@@ -28,20 +41,10 @@ The speed-up was measured using different numbers of threads (thread count) and 
 
 The execution time for the Golden Measure and the Multi-threaded implementations were compared in Table~\ref{tab:GMvMT}. This speed-up fluctuated with different image sizes. This is likely due to many factors interacting simultaneously and would require further investigation to isolate the cause. But the speed-up is 29.74 times on average across image sizes.
 
-\Table{Golden Measure vs Multi-threaded Comparison\label{tab:GMvMT}}{lccr}{ 
-	\textbf{} & \textbf{Golden Measure (s)} & \textbf{Multi-Threaded(s)} & \textbf{Speed-Up} 
-}{
-	Greatwall.jpg & 133,48 & 4.71 & 28.37 \\
-	Fly.jpg & 19.18 & 0.72 & 26.51 \\
-	Small.jpg  & 1.33 & 0.04 & 34.34 \\
-	Average &  &  & 29.74 \\
-}{Example}
 
-\subsection{Median Filter}
 
-The Median Filter was successful and resulted in blurred images as shown in Figure~\ref{fig:Output}. This is the amount of blurring that was expected from a 9x9 median filter so it appears that the filter itself works
 
-\Figure[width=0.9\columnwidth]{Input Images and Output Filtered Images\label{fig:Output}}{Report}
+
 
 
 
