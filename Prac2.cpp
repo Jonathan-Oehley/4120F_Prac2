@@ -65,6 +65,17 @@ int bubble_med(int start[], int length){
     }
 }
 
+
+int qsort_med(int start[], int length){
+    std::sort(start, start+length);
+    if (length%2==0){
+        return (int)(start[length/2]+start[length/2-1])/2;
+    }
+    else{
+        return start[(int)length/2];
+    }
+}
+
 // Filter function
 void median_filter(int y_start, int x_start, int y_end, int x_end, int (*med_sort)(int[], int)){
 
@@ -127,15 +138,7 @@ void median_filter(int y_start, int x_start, int y_end, int x_end, int (*med_sor
 void* Thread_Main(void* Parameter){
  allocation params = *((allocation*)Parameter);
 
- median_filter(params.y_start,params.x_start,params.y_end,params.x_end,select_med);
-
-// pthread_mutex_lock(&Mutex);
-// printf("Hello from thread %d with y_start %d and y_end %d\n and in 0/0 is: %d\n", params.ID, params.y_start, params.y_end, input.Rows[0][0]);
-// pthread_mutex_unlock(&Mutex);
-//
-// pthread_mutex_lock(&Mutex);
-//  printf("Thread %d: I QUIT!\n", params.ID);
-// pthread_mutex_unlock(&Mutex);
+ median_filter(params.y_start,params.x_start,params.y_end,params.x_end,qsort_med);
 
  return 0;
 }
@@ -150,7 +153,7 @@ int main(int argc, char** argv){
  pthread_mutex_init(&Mutex, 0);
 
  // Read the input image
- if(!Input.Read("Data/greatwall.jpg")){
+ if(!Input.Read("Data/fly.jpg")){
   printf("Cannot read image\n");
   return -1;
  }
@@ -158,39 +161,10 @@ int main(int argc, char** argv){
  // Allocated RAM for the output image
  if(!Output.Allocate(Input.Width, Input.Height, Input.Components)) return -2;
 
- // This is example code of how to copy image files ----------------------------
- // printf("Start of example code...\n");
- //for(j = 0; j < 10; j++){
- // tic();
- //int x, y;
- // for(y = 0; y < Input.Height; y++){
- //  for(x = 0; x < Input.Width*Input.Components; x++){
- //   Output.Rows[y][x] = Input.Rows[y][x];
- //  }
- // }
- // printf("Time = %lg ms\n", (double)toc()/1e-3);
- //}
- //printf("End of example code...\n\n");
- // End of example -------------------------------------------------------------
-
- // Copy Image File
- tic();
-
-//removed copying as it was unneccesary
-/*
- for(y = 0; y < Input.Height; y++){
-  for(x = 0; x < Input.Width*Input.Components; x++){
-   Output.Rows[y][x] = Input.Rows[y][x];
-  }
- }
- */
-
-  //Testing
-
  // Implement Median Filter
- printf("Starting filter\n");
+ printf("Starting filter bubble\n");
  tic();
- median_filter(0,0,Input.Height,Input.Width,select_med);
+ median_filter(0,0,Input.Height,Input.Width,bubble_med);
  printf("Time for golden standard filter = %lg s\n\n", (double)toc());
 
   // Write the output image
@@ -199,7 +173,7 @@ int main(int argc, char** argv){
   return -3;
  }
 
- int Thread_Count = 16;
+ int Thread_Count = 32;
  // Spawn threads...
  allocation Threads [Thread_Count]; // Structure to keep the tread information
 
@@ -207,7 +181,7 @@ int main(int argc, char** argv){
  int thread_split_y = floor(Input.Height/Thread_Count);
 
  //split by column
- int thread_split_x = floor(Input.Width/Thread_Count);
+ //int thread_split_x = floor(Input.Width/Thread_Count);
 
  for(j = 0; j < Thread_Count-1; j++){ //create threads and allocate them a workload
 
@@ -263,8 +237,6 @@ int main(int argc, char** argv){
   printf("Cannot write image\n");
   return -3;
  }
-
-
 
  // Clean-up
  pthread_mutex_destroy(&Mutex);
