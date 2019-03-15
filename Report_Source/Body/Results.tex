@@ -21,9 +21,12 @@ The std::sort method inbuilt to c++ is a hybrid function using much more efficie
 
 \subsection{Thread count investigation}
 
+
+\Figure[width=1\columnwidth]{Relationship between Thread Count and Speed-Up\label{fig:Graph}}{Speed_Up_Graph}
+
 \subsection{Implementation comparison}
 
-The execution time for the Golden Measure and the Multi-threaded implementations were compared in Table~\ref{tab:GMvMT}. This Speedup fluctuated with different image sizes. This is likely due to many factors interacting simultaneously and would require further investigation to isolate the cause. But the Speedup is approximately 30 times on average across image sizes.
+The execution time for the Golden Measure and the Multi-threaded implementations were compared in Table~\ref{tab:GMvMT}. This Speedup fluctuated with different image sizes. This is likely due to many factors interacting simultaneously and would require further investigation to isolate the cause. But the Speedup is 29.74 times on average across image sizes.
 
 \Table{Golden Measure vs Multi-threaded Comparison\label{tab:GMvMT}}{lccr}{ 
 	\textbf{} & \textbf{Golden Measure (s)} & \textbf{Multi-Threaded(s)} & \textbf{Speedup} 
@@ -34,6 +37,12 @@ The execution time for the Golden Measure and the Multi-threaded implementations
 	Average &  &  & 29.74 \\
 }{Example}
 
-\Figure[width=1\columnwidth]{Relationship between Thread Count and Speed-Up\label{fig:Graph}}{Speed_Up_Graph}
+\subsection{Median Filter}
+
+The Median Filter was successful and resulted in blurred images as shown in Figure~\ref{fig:Output}. This is the amount of blurring that was expected from a 9x9 median filter so it appears that the filter itself works
+
+\Figure[width=0.9\columnwidth]{Input Images and Output Filtered Images\label{fig:Output}}{Report}
+
+
 
 
