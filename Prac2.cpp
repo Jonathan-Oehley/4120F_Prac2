@@ -153,7 +153,7 @@ int main(int argc, char** argv){
  pthread_mutex_init(&Mutex, 0);
 
  // Read the input image
- if(!Input.Read("Data/fly.jpg")){
+ if(!Input.Read("Data/greatwall.jpg")){
   printf("Cannot read image\n");
   return -1;
  }

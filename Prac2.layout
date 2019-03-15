@@ -2,14 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
-	<File name="Tools\Timer.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="951" topLine="35" />
-		</Cursor>
-	</File>
 	<File name="Tools\Timer.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Prac2.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5044" topLine="135" />
 		</Cursor>
 	</File>
 	<File name="Prac2.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -17,21 +17,15 @@
 			<Cursor1 position="1112" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="Tools\Timer.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="951" topLine="35" />
+		</Cursor>
+	</File>
 	<File name="Tools\JPEG.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="15" />
 		</Cursor>
-	</File>
-	<File name="Prac2.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="825" topLine="123" />
-		</Cursor>
-		<Folding>
-			<Collapse line="25" />
-			<Collapse line="34" />
-			<Collapse line="54" />
-			<Collapse line="70" />
-		</Folding>
 	</File>
 	<File name="Tools\JPEG.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
