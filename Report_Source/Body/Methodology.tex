@@ -1,6 +1,6 @@
 % !TeX spellcheck = en_GB 
 \section{Methodology}
-The implementation of a median filter requires some definition with regard to the pixels near the edge of an image. The outer edge-case pixels were calculated by the following means; the area over which the pixel component values were compared with to determine the median was simply truncated by the edge of the image. In other words, for the pixels in the furthest corners, the area over which the median was determined was 5 x 5 pixels.
+The implementation of a median filter requires some definition around the pixels near the edge of an image. The outer edge-case pixels were calculated by the following means; the area over which the pixel component values were compared with to determine the median was simply truncated by the edge of the image. In other words, for the pixels in the furthest corners, the area over which the median was determined was 5 x 5 pixels.
 
 \subsection{Golden Measure}
 The golden measure was created as a relatively simple block of code that's main objective was to be a working model. From this, further implementation could be compared and a comparison drawn.
@@ -10,9 +10,9 @@ The golden measure sorting method was implemented as a simple bubble sort. While
 \subsection{Multi-thread Implementation}
 This implementation looked to improve the execution time of the golden measure. This was done using two techniques. 
 
-Firstly, instead of implementing a bubble sort as per the previous implementation, a investigation was made between bubble sort, a select sort function (which only sorted just above halfway to get the median) and the hybrid sort function (std::sort()) built into c++. The fastest sorting method was used in this implementation which will be discussed in the Results section.
+Firstly, instead of implementing a bubble sort by default, a investigation was made between bubble sort, a select sort function (which only sorted just above halfway to get the median) and the hybrid sort function (std::sort()) built into c++. The fastest sorting method was used in this implementation which will be discussed in the Results section.
 
-Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partitioning of the image into rows. This allows the data sorting tasks to be split up over multiple processors to decrease the overall execution time of the application. No mutex was required as each pixel of the output jpeg is only written to once and there would be no chance of threads reading or writing to the same memory address.
+Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partitioning of the image into rows. This allows the data sorting tasks to be split up over multiple processors to decrease the overall execution time of the application. No mutex was required as each pixel of the output jpeg is only written to once.
   
 \subsection{Experiment Procedure}
 The program was coded using a shared git repository to allow collaboration between the two students. The code was tested periodically to ensure functionality of each function.
