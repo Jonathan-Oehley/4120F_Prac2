@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.3.15)  15 MAR 2019 21:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.3.15)  15 MAR 2019 21:52
 entering extended mode
 **./Report.tex
 (Report.tex
@@ -640,17 +640,17 @@ fig/pdftex.map}
 
 
 ]
-<Figures/Speed_Up_Graph.png, id=67, 421.575pt x 316.0608pt>
+<Figures/Speed_Up_Graph.png, id=68, 421.575pt x 316.0608pt>
 File: Figures/Speed_Up_Graph.png Graphic file (type png)
 <use Figures/Speed_Up_Graph.png>
 Package pdftex.def Info: Figures/Speed_Up_Graph.png  used on input line 25.
 (pdftex.def)             Requested size: 252.0pt x 188.929pt.
 
-Overfull \hbox (1.39778pt too wide) in paragraph at lines 38--38
+Overfull \hbox (5.38977pt too wide) in paragraph at lines 38--38
  [][] 
  []
 
-<Figures/Report.jpg, id=70, 1294.23524pt x 983.47424pt>
+<Figures/Report.jpg, id=71, 1294.23524pt x 983.47424pt>
 File: Figures/Report.jpg Graphic file (type jpg)
 <use Figures/Report.jpg>
 Package pdftex.def Info: Figures/Report.jpg  used on input line 44.
@@ -685,7 +685,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 37.
 Here is how much of TeX's memory you used:
  8069 strings out of 492946
  126751 string characters out of 3123602
- 327512 words of memory out of 3000000
+ 328512 words of memory out of 3000000
  11825 multiletter control sequences out of 15000+200000
  41267 words of font info for 75 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -697,9 +697,9 @@ ic/amsfonts/cm/cmsy7.pfb><C:/Users/Lolarent000/AppData/Local/Programs/MiKTeX 2.
 /MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Lolarent000/AppData/Loc
 al/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Lolarent000/A
 ppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Report.pdf (2 pages, 642935 bytes).
+Output written on Report.pdf (2 pages, 643586 bytes).
 PDF statistics:
- 102 PDF objects out of 1000 (max. 8388607)
+ 103 PDF objects out of 1000 (max. 8388607)
  21 named destinations out of 1000 (max. 500000)
  107 words of extra memory for PDF output out of 10000 (max. 10000000)
 
