@@ -118,6 +118,9 @@ void median_filter(JPEG* input, JPEG* output, int y, int x, int y_end, int x_end
     Output.Rows[y][3*x] = med_sort(r_arr,y_length*x_length);
     Output.Rows[y][3*x+1] = med_sort(g_arr,y_length*x_length);
     Output.Rows[y][3*x+2] = med_sort(b_arr,y_length*x_length);
+//    delete [] r_arr;
+//    delete [] g_arr;
+//    delete [] b_arr;
     }
  }
 
@@ -129,15 +132,15 @@ void* Thread_Main(void* Parameter){
  JPEG input = *params.pic_in;
  JPEG output = *params.pic_out;
 
- median_filter(params.pic_in,params.pic_out,params.y_start,params.x_start,params.y_end,params.x_end,select_med);
+ median_filter(params.pic_in,params.pic_out,params.y_start,params.x_start,params.y_end,params.x_end,bubble_med);
 
- pthread_mutex_lock(&Mutex);
- printf("Hello from thread %d with y_start %d and y_end %d\n and in 0/0 is: %d\n", params.ID, params.y_start, params.y_end, input.Rows[0][0]);
- pthread_mutex_unlock(&Mutex);
-
- pthread_mutex_lock(&Mutex);
-  printf("Thread %d: I QUIT!\n", params.ID);
- pthread_mutex_unlock(&Mutex);
+// pthread_mutex_lock(&Mutex);
+// printf("Hello from thread %d with y_start %d and y_end %d\n and in 0/0 is: %d\n", params.ID, params.y_start, params.y_end, input.Rows[0][0]);
+// pthread_mutex_unlock(&Mutex);
+//
+// pthread_mutex_lock(&Mutex);
+//  printf("Thread %d: I QUIT!\n", params.ID);
+// pthread_mutex_unlock(&Mutex);
 
  return 0;
 }
@@ -152,7 +155,7 @@ int main(int argc, char** argv){
  pthread_mutex_init(&Mutex, 0);
 
  // Read the input image
- if(!Input.Read("Data/Alan2.jpg")){
+ if(!Input.Read("Data/Alan.jpg")){
   printf("Cannot read image\n");
   return -1;
  }
@@ -201,7 +204,7 @@ int main(int argc, char** argv){
   return -3;
  }
 
- int Thread_Count = 16;
+ int Thread_Count = 8;
  // Spawn threads...
  allocation Threads [Thread_Count]; // Structure to keep the tread information
 
@@ -261,15 +264,17 @@ int main(int argc, char** argv){
   }
  }
 
+// No more active threads, so no more critical sections required
+ printf("All threads have quit\n");
+ printf("Time taken for threads to run = %lg s\n", toc());
+
    // Write the output image
  if(!Output.Write("Data/Output_PThreads.jpg")){
   printf("Cannot write image\n");
   return -3;
  }
 
- // No more active threads, so no more critical sections required
- printf("All threads have quit\n");
- printf("Time taken for threads to run = %lg ms\n", toc()/1e-3);
+
 
  // Clean-up
  pthread_mutex_destroy(&Mutex);
