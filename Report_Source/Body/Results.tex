@@ -1,7 +1,7 @@
 % !TeX spellcheck = en_GB 
 \section{Results}
 
-All values of execution times are averages of at least 3 different measurements. The Speedup is calculated as the baseline (either the Golden Measure or Bubble Sort) divided by the new speed achieved. Speedup can be read as the compared value is Speedup times faster than the baseline.
+All values of execution times are averages of at least 3 different measurements. The speed-up is calculated as the baseline (either the Golden Measure or Bubble Sort) divided by the new speed achieved. speed-up can be read as the compared value is speed-up times faster than the baseline.
 
 \subsection{Sorting Algorithms}
 
@@ -13,20 +13,23 @@ The first comparison drawn was the difference in executing times of the median f
 	Fly.jpg (s) & 25.23 & 7.75 & 4.66 \\
 	Alan.jpg (s) & 9.43 & 3.76 & 1.95 \\
 	Average (s) & 17.33 & 5.75 & 3.30 \\
-	Speed-up & 1.00 & 3.01 & 5.25 \\
+	Speed-Up & 1.00 & 3.01 & 5.25 \\
 }{Example}
 
 The Select sort was significantly more efficient and the ability to stop halfway through sorting to get the median sped it up a lot but the select algorithm itself isn't particularly efficient so that slows it down.
 The std::sort method inbuilt to c++ is a hybrid function using much more efficient algorithms and therefore it is the fastest and was used in the final measurement for the multi-threaded implementation. 
 
 \subsection{Thread count investigation}
+The speed-up was measured using different numbers of threads (thread count) and the results were plotted in Figure~\ref{fig:Graph}. There was a peak in efficiency somewhere around 512 threads. The values near this point did not show much fluctuation and thus this was chosen as the thread count that will be used for the Implementation comparison
+
+\Figure[width=1\columnwidth]{Relationship between Thread Count and Speed-Up\label{fig:Graph}}{Speed_Up_Graph}
 
 \subsection{Implementation comparison}
 
-The execution time for the Golden Measure and the Multi-threaded implementations were compared in Table~\ref{tab:GMvMT}. This Speedup fluctuated with different image sizes. This is likely due to many factors interacting simultaneously and would require further investigation to isolate the cause. But the Speedup is approximately 30 times on average across image sizes.
+The execution time for the Golden Measure and the Multi-threaded implementations were compared in Table~\ref{tab:GMvMT}. This speed-up fluctuated with different image sizes. This is likely due to many factors interacting simultaneously and would require further investigation to isolate the cause. But the speed-up is 29.74 times on average across image sizes.
 
 \Table{Golden Measure vs Multi-threaded Comparison\label{tab:GMvMT}}{lccr}{ 
-	\textbf{} & \textbf{Golden Measure (s)} & \textbf{Multi-Threaded(s)} & \textbf{Speedup} 
+	\textbf{} & \textbf{Golden Measure (s)} & \textbf{Multi-Threaded(s)} & \textbf{Speed-Up} 
 }{
 	Greatwall.jpg & 133,48 & 4.71 & 28.37 \\
 	Fly.jpg & 19.18 & 0.72 & 26.51 \\
@@ -34,6 +37,12 @@ The execution time for the Golden Measure and the Multi-threaded implementations
 	Average &  &  & 29.74 \\
 }{Example}
 
-\Figure[width=1\columnwidth]{Relationship between Thread Count and Speed-Up\label{fig:Graph}}{Speed_Up_Graph}
+\subsection{Median Filter}
+
+The Median Filter was successful and resulted in blurred images as shown in Figure~\ref{fig:Output}. This is the amount of blurring that was expected from a 9x9 median filter so it appears that the filter itself works
+
+\Figure[width=0.9\columnwidth]{Input Images and Output Filtered Images\label{fig:Output}}{Report}
+
+
 
 
