@@ -1,3 +1,5 @@
 % !TeX spellcheck = en_GB 
 \section{Conclusion}
+It was found in this report that the use of data partitioning and multithreading when implementing a 9 x 9 median filter for an image significantly reduces the execution time of the application. On average a speedup of 29.74 was found when implementing a multi-threaded implementation compared with a serial one. The investigation into which sorting algorithm was faster for use in a median filter concluded that a Qsort was the most suitable. Finally, it was found that the speedup of the implemented filter increased with thread-count up until a certain critical point where speedup starts to decrease with an increasing number of threads.
 
+\Figure[width=0.9\columnwidth]{Input Images and Output Filtered Images\label{fig:Output}}{Report}
