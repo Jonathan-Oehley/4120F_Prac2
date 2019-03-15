@@ -10,9 +10,11 @@ The golden measure sorting method was implemented as a simple bubble sort. While
 \subsection{Multi-thread Implementation}
 This implementation looked to improve the execution time of the golden measure. This was done using two techniques. 
 
-Firstly, instead of implementing a bubble sort the more complex select sort algorithm was implemented. While more difficult to code, this sorting technique performs better on average than the bubble sort in this type of application. It is of particular note that the reason the selection sort particularly performs better in this application, is due to the fact that the algorithm needs only to sort half of the data in order to find the median.
+Firstly, instead of implementing a bubble sort by default, a investigation was made between bubble sort, a select sort function (which only sorted just above halfway to get the median) and the hybrid sort function (std::sort()) built into c++. The fastest sorting method was used in this implementation which will be discussed in the Results section.
 
-Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partioning of the image into columns. This allows the data sorting tasks to be split up over multiple processors to increase the overall execution time of the application
+Secondly, the golden measure implementation was converted into a multi-threaded application. This was done through data-partitioning of the image into rows. This allows the data sorting tasks to be split up over multiple processors to decrease the overall execution time of the application
   
 \subsection{Experiment Procedure}
-Furthermore, include detail relating to the experiment itself: what did you do, in what order was this done, why was this done, etc.  What are you trying to prove / disprove?
+The program was coded using a shared git repository to allow collaboration between the two students. The code was tested periodically to ensure functionality of each function.
+
+Testing was conducted by running the program a few times to ensure that it was stored in cache before taking readings. Then the program was run with different inputs, number of threads and sorting functions. The execution time for each case was measured for multiple runs of the program and averaged across them. This generates a single value for the execution time of the program with those parameters.
