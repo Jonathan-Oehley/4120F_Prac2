@@ -24,8 +24,6 @@
 //Structure for dividing work for pthreads
 struct allocation
 {
-    JPEG *pic_in;
-    JPEG *pic_out;
     int x_start, y_start, x_end, y_end, ID;
     pthread_t Thread;
 };
@@ -68,14 +66,13 @@ int bubble_med(int start[], int length){
 }
 
 // Filter function
-void median_filter(JPEG* input, JPEG* output, int y, int x, int y_end, int x_end, int (*med_sort)(int[], int)){
- JPEG Input = *input;
- JPEG Output = *output;
+void median_filter(int y_start, int x_start, int y_end, int x_end, int (*med_sort)(int[], int)){
 
  // Note that for loops run over the pixel indices, not the RGB values
  int y_u,y_d,x_l, x_r; // Bounds on the columns/rows when constructing the data array for sorting
  int y_length,x_length,yi,xi; //Bounds and indices for area to copy
- for(y = 0; y < y_end; y++){
+
+ for(int y = y_start; y < y_end; y++){
     // Check to see if we are close to top/bottom of image
     if (y<4){
         y_u = y;
@@ -86,7 +83,7 @@ void median_filter(JPEG* input, JPEG* output, int y, int x, int y_end, int x_end
     }
     else y_d = 4;
 
-    for(x = 0; x < x_end; x++){
+    for(int x = x_start; x < x_end; x++){
         // Check to see if we are close to left/right of image
         if (x<4){
             x_l = x;
@@ -129,10 +126,8 @@ void median_filter(JPEG* input, JPEG* output, int y, int x, int y_end, int x_end
 // This is each thread's "main" function.  It receives a unique ID
 void* Thread_Main(void* Parameter){
  allocation params = *((allocation*)Parameter);
- JPEG input = *params.pic_in;
- JPEG output = *params.pic_out;
 
- median_filter(params.pic_in,params.pic_out,params.y_start,params.x_start,params.y_end,params.x_end,bubble_med);
+ median_filter(params.y_start,params.x_start,params.y_end,params.x_end,select_med);
 
 // pthread_mutex_lock(&Mutex);
 // printf("Hello from thread %d with y_start %d and y_end %d\n and in 0/0 is: %d\n", params.ID, params.y_start, params.y_end, input.Rows[0][0]);
@@ -155,7 +150,7 @@ int main(int argc, char** argv){
  pthread_mutex_init(&Mutex, 0);
 
  // Read the input image
- if(!Input.Read("Data/Alan.jpg")){
+ if(!Input.Read("Data/greatwall.jpg")){
   printf("Cannot read image\n");
   return -1;
  }
@@ -195,7 +190,7 @@ int main(int argc, char** argv){
  // Implement Median Filter
  printf("Starting filter\n");
  tic();
- median_filter(&Input,&Output,0,0,Input.Height,Input.Width,bubble_med);
+ median_filter(0,0,Input.Height,Input.Width,select_med);
  printf("Time for golden standard filter = %lg s\n\n", (double)toc());
 
   // Write the output image
@@ -204,7 +199,7 @@ int main(int argc, char** argv){
   return -3;
  }
 
- int Thread_Count = 8;
+ int Thread_Count = 16;
  // Spawn threads...
  allocation Threads [Thread_Count]; // Structure to keep the tread information
 
@@ -228,9 +223,6 @@ int main(int argc, char** argv){
     Threads[j].y_start = thread_split_y*j;
     Threads[j].y_end = thread_split_y*(j+1)-1;
 
-    Threads[j].pic_in = &Input;
-    Threads[j].pic_out = &Output;
-
     Threads[j].ID = j;
     pthread_create(&Threads[j].Thread, 0, Thread_Main, (void*)&Threads[j]);
  }
@@ -244,8 +236,6 @@ int main(int argc, char** argv){
  Threads[Thread_Count-1].x_end = Input.Width-1;
  Threads[Thread_Count-1].y_end = Input.Height-1;
 
- Threads[j].pic_in = &Input;
- Threads[j].pic_out = &Output;
  Threads[Thread_Count-1].ID = Thread_Count-1;
  pthread_create(&Threads[Thread_Count-1].Thread, 0, Thread_Main, (void*)&Threads[Thread_Count-1]);
 
